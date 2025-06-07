@@ -133,5 +133,5 @@ p {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  pointer-events: none; /* so it doesn't block clicks */
+  pointer-events: none; /* so it doesn't block any clicks */
 }
