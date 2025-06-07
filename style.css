@@ -1,5 +1,19 @@
+/* --- Start of style.css --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  cursor: none; /* Hides the default PC cursor */
+}
+
 .container {
-  /* existing styles... */
   max-width: 700px;
   text-align: center;
   opacity: 0;
@@ -12,3 +26,92 @@
     opacity: 1;
   }
 }
+
+h1 {
+  font-size: 3rem;
+  color: #a259ff;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #c0c0c0;
+  margin-bottom: 1.5rem;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  color: rgba(192, 192, 192, 0.6);
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.discord-button {
+  background-color: #a259ff;
+  border: none;
+  color: #ffffff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: none; /* Keep the fix from before */
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.discord-button:hover {
+  background-color: #8f40f5;
+}
+
+.read-more-toggle {
+  color: #a259ff;
+  cursor: none; /* Keep the fix from before */
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+.read-more-content {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  transition: opacity 0.5s ease, visibility 0.5s ease, max-height 0.5s ease;
+  overflow: hidden;
+}
+
+.read-more-content.show {
+  opacity: 1;
+  visibility: visible;
+  max-height: 500px;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #a259ff; /* Purple */
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease;
+}
+
+.cursor-outline {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #a259ff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+}
+/* --- End of style.css --- */
