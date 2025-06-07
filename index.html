@@ -182,6 +182,55 @@
       });
     });
   </script>
+<style>
+  body {
+    cursor: none; /* Hides the default PC cursor */
+  }
+
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #a259ff; /* Purple */
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
+  }
+
+  .cursor-outline {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #a259ff;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+</style>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<script>
+  const cursorDot = document.querySelector(".cursor-dot");
+  const cursorOutline = document.querySelector(".cursor-outline");
+
+  window.addEventListener("mousemove", (e) => {
+    cursorDot.style.top = `${e.clientY}px`;
+    cursorDot.style.left = `${e.clientX}px`;
+
+    cursorOutline.style.top = `${e.clientY}px`;
+    cursorOutline.style.left = `${e.clientX}px`;
+  });
+</script>
 
 </body>
 </html>
