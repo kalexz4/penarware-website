@@ -1,4 +1,54 @@
 // --- Start of script.js ---
+tsParticles.load("tsparticles", {
+  background: {
+    color: "#0d0d0d"
+  },
+  fpsLimit: 60,
+  particles: {
+    color: {
+      value: "#ffffff"
+    },
+    links: {
+      color: "#ffffff",
+      distance: 130,
+      enable: true,
+      opacity: 0.2,
+      width: 1
+    },
+    collisions: {
+      enable: false
+    },
+    move: {
+      direction: "none",
+      enable: true,
+      outModes: {
+        default: "bounce"
+      },
+      random: false,
+      speed: 0.6,
+      straight: false
+    },
+    number: {
+      density: {
+        enable: true,
+        area: 800
+      },
+      value: 50
+    },
+    opacity: {
+      value: 0.5
+    },
+    shape: {
+      type: "circle"
+    },
+    size: {
+      value: { min: 1, max: 3 }
+    }
+  },
+  detectRetina: true
+});
+
+
 function toggleReadMore() {
   const section = document.getElementById("readMoreSection");
   const toggle = document.getElementById("readMoreToggle");
