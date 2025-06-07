@@ -1,3 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hazy's Nixware HvH Configs</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInPage 1s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeInPage {
+      to {
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #a259ff;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #c0c0c0;
+      margin-bottom: 1.5rem;
+    }
+
+    .small-text {
+      font-size: 0.9rem;
+      color: rgba(192, 192, 192, 0.6);
+      line-height: 1.6;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .discord-button {
+      background-color: #a259ff;
+      border: none;
+      color: #ffffff;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .discord-button:hover {
+      background-color: #8f40f5;
+    }
+
+    .read-more-toggle {
+      color: #a259ff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+
+    .read-more-content {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+      transition: opacity 0.5s ease, visibility 0.5s ease, max-height 0.5s ease;
+      overflow: hidden;
+    }
+
+    .read-more-content.show {
+      opacity: 1;
+      visibility: visible;
+      max-height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hazy's Nixware HvH Configs</h1>
+    <p>Taps <em>all</em> cheats, Cheap, and Fast Support + Delivery. 💜</p>
+
+    <p class="small-text">
+      Hello! We offer a premium HvH config for anyone who wants to dominate their lobbies with Nixware! Our config should tap any cheat 99% of the time. We have tested with Skeet (Gamesense), Neverlose, Fatality, etc. We also include bonus Lua scripts along with our settings to them, so you can have a smoother experience.
+    </p>
+
+    <a href="https://discord.gg/exbQmeGv6D" class="discord-button" target="_blank">
+      Join Our Discord
+    </a>
+
+    <div class="read-more-toggle" id="readMoreToggle" onclick="toggleReadMore()">Read More</div>
+
+    <div class="read-more-content" id="readMoreSection">
+      <div class="small-text">
+        Are you tired of wasting money buying configs that won't tap anything and just hit feet? Are you done with shitty devs that act like crap and don't help you do or set up anything if you're new? <br /><br />
+        <strong>We have the solution!</strong> Our Discord has some very talented Devs who will help you set everything up and help you with anything else. Our CFG has been tested over hours of our own time to try to make it as good as possible. We hope to see you in our Discord soon! -Hazy
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleReadMore() {
+      const section = document.getElementById("readMoreSection");
+      const toggle = document.getElementById("readMoreToggle");
+
+      section.classList.toggle("show");
+      toggle.textContent = section.classList.contains("show") ? "Read Less" : "Read More";
+    }
+  </script>
+</body>
 <style>
   body {
     cursor: none; /* Hides the default PC cursor */
@@ -47,3 +175,5 @@
     cursorOutline.style.left = `${e.clientX}px`;
   });
 </script>
+
+</html>
