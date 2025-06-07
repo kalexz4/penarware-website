@@ -1,70 +1,57 @@
-// --- Start of script.js ---
-tsParticles.load("tsparticles", {
-  background: {
-    color: "#0d0d0d"
-  },
-  fpsLimit: 60,
-  particles: {
-    color: {
-      value: "#ffffff"
+document.addEventListener("DOMContentLoaded", () => {
+  // Load particle background
+  tsParticles.load("tsparticles", {
+    background: {
+      color: "#0d0d0d"
     },
-    links: {
-      color: "#ffffff",
-      distance: 130,
-      enable: true,
-      opacity: 0.2,
-      width: 1
-    },
-    collisions: {
-      enable: false
-    },
-    move: {
-      direction: "none",
-      enable: true,
-      outModes: {
-        default: "bounce"
-      },
-      random: false,
-      speed: 0.6,
-      straight: false
-    },
-    number: {
-      density: {
+    fpsLimit: 60,
+    particles: {
+      color: { value: "#ffffff" },
+      links: {
+        color: "#ffffff",
+        distance: 130,
         enable: true,
-        area: 800
+        opacity: 0.2,
+        width: 1
       },
-      value: 50
+      collisions: { enable: false },
+      move: {
+        direction: "none",
+        enable: true,
+        outModes: { default: "bounce" },
+        random: false,
+        speed: 0.6,
+        straight: false
+      },
+      number: {
+        density: { enable: true, area: 800 },
+        value: 50
+      },
+      opacity: { value: 0.5 },
+      shape: { type: "circle" },
+      size: { value: { min: 1, max: 3 } }
     },
-    opacity: {
-      value: 0.5
-    },
-    shape: {
-      type: "circle"
-    },
-    size: {
-      value: { min: 1, max: 3 }
-    }
-  },
-  detectRetina: true
-});
+    detectRetina: true
+  });
 
-
-function toggleReadMore() {
+  // Toggle Read More content
   const section = document.getElementById("readMoreSection");
   const toggle = document.getElementById("readMoreToggle");
 
-  section.classList.toggle("show");
-  toggle.textContent = section.classList.contains("show") ? "Read Less" : "Read More";
-}
+  toggle.addEventListener("click", () => {
+    section.classList.toggle("show");
+    toggle.textContent = section.classList.contains("show") ? "Read Less" : "Read More";
+  });
 
-const cursorDot = document.querySelector(".cursor-dot");
-const cursorOutline = document.querySelector(".cursor-outline");
+  // Custom cursor
+  const cursorDot = document.querySelector(".cursor-dot");
+  const cursorOutline = document.querySelector(".cursor-outline");
 
-window.addEventListener("mousemove", (e) => {
-  cursorDot.style.top = `${e.clientY}px`;
-  cursorDot.style.left = `${e.clientX}px`;
-
-  cursorOutline.style.top = `${e.clientY}px`;
-  cursorOutline.style.left = `${e.clientX}px`;
+  window.addEventListener("mousemove", (e) => {
+    const { clientX, clientY } = e;
+    cursorDot.style.top = `${clientY}px`;
+    cursorDot.style.left = `${clientX}px`;
+    cursorOutline.style.top = `${clientY}px`;
+    cursorOutline.style.left = `${clientX}px`;
+  });
 });
-// --- End of script.js ---
