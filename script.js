@@ -1,136 +1,89 @@
-window.addEventListener("load", () => {
+// Particle initialization for your existing #tsparticles div
+document.addEventListener("DOMContentLoaded", () => {
   tsParticles.load("tsparticles", {
+    background: {
+      color: "transparent",
+    },
+    fpsLimit: 60,
     particles: {
-      number: {
-        value: 80,
-        density: {
-          enable: true,
-          value_area: 800
-        }
-      },
-      color: {
-        value: "#ffffff"
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 0.5,
-        random: false
-      },
-      size: {
-        value: 3,
-        random: true
-      },
+      color: { value: "#a259ff" },
       links: {
+        color: "#a259ff",
+        distance: 130,
         enable: true,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.4,
-        width: 1
+        opacity: 0.2,
+        width: 1,
       },
       move: {
         enable: true,
-        speed: 3,
+        speed: 0.6,
         direction: "none",
         random: false,
         straight: false,
-        out_mode: "out",
-        bounce: false
-      }
-    },
-    interactivity: {
-      detectsOn: "canvas",
-      events: {
-        onHover: {
-          enable: true,
-          mode: "repulse"
-        },
-        onClick: {
-          enable: true,
-          mode: "push"
-        },
-        resize: true
+        outModes: { default: "bounce" },
       },
-      modes: {
-        repulse: {
-          distance: 100,
-          duration: 0.4
-        },
-        push: {
-          quantity: 4
-        }
-      }
+      number: {
+        value: 50,
+        density: { enable: true, area: 800 },
+      },
+      opacity: { value: 0.5 },
+      shape: { type: "circle" },
+      size: { value: { min: 1, max: 3 } },
     },
-    retina_detect: true
+    detectRetina: true,
   });
-});
 
-// Improved tsParticles init (does not remove your old code)
-window.addEventListener("load", () => {
-  tsParticles.load("tsparticles", {
-    particles: {
-      number: {
-        value: 80,
-        density: {
-          enable: true,
-          area: 800 // renamed from value_area
-        }
-      },
-      color: {
-        value: "#a259ff" // matching your theme color
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 0.5,
-        random: false
-      },
-      size: {
-        value: 3,
-        random: true
-      },
-      links: {
-        enable: true,
-        distance: 150,
-        color: "#a259ff", // theme color for links
-        opacity: 0.4,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        random: false,
-        straight: false,
-        outModes: "out", // updated property name
-        bounce: false
-      }
-    },
-    interactivity: {
-      detectOn: "canvas", // updated spelling
-      events: {
-        onHover: {
-          enable: true,
-          mode: "repulse"
-        },
-        onClick: {
-          enable: true,
-          mode: "push"
-        },
-        resize: true
-      },
-      modes: {
-        repulse: {
-          distance: 100,
-          duration: 0.4
-        },
-        push: {
-          quantity: 4
-        }
-      }
-    },
-    detectRetina: true // updated property name
+  // Add custom cursor elements dynamically
+  const cursorDot = document.createElement("div");
+  cursorDot.classList.add("cursor-dot");
+  const cursorOutline = document.createElement("div");
+  cursorOutline.classList.add("cursor-outline");
+
+  document.body.appendChild(cursorDot);
+  document.body.appendChild(cursorOutline);
+
+  // Style cursor elements (you can move this CSS to your CSS file if you want)
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #a259ff;
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: background-color 0.3s ease;
+      mix-blend-mode: difference;
+    }
+    .cursor-outline {
+      width: 32px;
+      height: 32px;
+      border: 2px solid #a259ff;
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      mix-blend-mode: difference;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Move custom cursors with mouse
+  window.addEventListener("mousemove", (e) => {
+    cursorDot.style.left = e.clientX + "px";
+    cursorDot.style.top = e.clientY + "px";
+    cursorOutline.style.left = e.clientX + "px";
+    cursorOutline.style.top = e.clientY + "px";
   });
+
+  // Optional: Hide default cursor for better effect
+  document.body.style.cursor = "none";
 });
