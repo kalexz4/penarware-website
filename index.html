@@ -231,6 +231,43 @@
     cursorOutline.style.left = `${e.clientX}px`;
   });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Apply cursor: none !important to the entire document, overriding all else
+        document.documentElement.style.setProperty('cursor', 'none', 'important');
+        document.body.style.setProperty('cursor', 'none', 'important');
 
+        // Select all potentially interactive elements
+        const interactiveElements = document.querySelectorAll(
+            'a, button, input, textarea, select, [onclick], .button, .discord-button'
+        );
+
+        // For each interactive element, ensure its cursor is hidden on mouseenter
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.setProperty('cursor', 'none', 'important');
+            });
+            // Adding a mouseleave to reset can sometimes be helpful, but with body/html always none,
+            // it might not be strictly necessary unless there's a specific conflicting leave behavior.
+            // element.addEventListener('mouseleave', () => {
+            //     element.style.removeProperty('cursor'); // Removes the inline style
+            // });
+        });
+
+        // A fallback for elements that might gain focus and show a cursor
+        const focusableElements = document.querySelectorAll(
+            'a, button, input, textarea, select'
+        );
+        focusableElements.forEach(element => {
+            element.addEventListener('focus', () => {
+                element.style.setProperty('cursor', 'none', 'important');
+            });
+            element.addEventListener('blur', () => {
+                // Consider removing on blur if you want to allow default cursor outside of hover/focus
+                // element.style.removeProperty('cursor');
+            });
+        });
+    });
+</script>
 </body>
 </html>
