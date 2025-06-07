@@ -16,6 +16,8 @@
       align-items: center;
       min-height: 100vh;
       padding: 2rem;
+      /* Ensure the custom cursor is applied globally and consistently */
+      cursor: none; /* Hides the default PC cursor */
     }
 
     .container {
@@ -24,6 +26,10 @@
       opacity: 0;
       animation: fadeInPage 1s ease forwards;
       animation-delay: 0.2s;
+      /* Add a higher z-index to your main content container
+         so it sits above the particles. */
+      position: relative; /* Needed for z-index to work */
+      z-index: 1; /* Puts your content above the particle background */
     }
 
     @keyframes fadeInPage {
@@ -59,7 +65,7 @@
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
       border-radius: 8px;
-      cursor: pointer;
+      cursor: pointer; /* This cursor will be hidden by your custom cursor logic */
       transition: background-color 0.3s ease;
       text-decoration: none;
       display: inline-block;
@@ -72,7 +78,7 @@
 
     .read-more-toggle {
       color: #a259ff;
-      cursor: pointer;
+      cursor: pointer; /* This cursor will be hidden by your custom cursor logic */
       font-size: 0.95rem;
       margin-top: 1rem;
       text-decoration: underline;
@@ -92,22 +98,50 @@
       max-height: 500px;
     }
 
-    /* Particle container style */
+    /* --- tsParticles container style (ADDED/MOVED HERE) --- */
     #tsparticles {
-      position: fixed;
+      position: fixed; /* Fixed to the viewport */
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-      background: transparent;
+      z-index: -1; /* Puts it behind all other content */
+      pointer-events: none; /* Allows clicks/hovers to pass through */
+      background: transparent; /* Essential for your body background to show through */
+    }
+
+    /* --- Custom Cursor Styles (MOVED HERE) --- */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #a259ff; /* Purple */
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Ensures cursor dot doesn't block interaction */
+      z-index: 9999; /* Always on top */
+      transform: translate(-50%, -50%);
+      transition: background-color 0.3s ease;
+    }
+
+    .cursor-outline {
+      width: 32px;
+      height: 32px;
+      border: 2px solid #a259ff;
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* Ensures cursor outline doesn't block interaction */
+      z-index: 9998; /* Just below the dot */
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
     }
   </style>
 </head>
 <body>
 
-  <!-- Particle container -->
   <div id="tsparticles"></div>
 
   <div class="container">
@@ -142,19 +176,17 @@
     }
   </script>
 
-  <!-- tsParticles CDN -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.0/tsparticles.bundle.min.js"></script>
 
-  <!-- Particle initialization -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       tsParticles.load("tsparticles", {
         background: {
-          color: "transparent"
+          color: "transparent" // Important for your body background to show
         },
         fpsLimit: 60,
         particles: {
-          color: { value: "#a259ff" },
+          color: { value: "#a259ff" }, // Particle color matches your theme
           links: {
             color: "#a259ff",
             distance: 130,
@@ -182,56 +214,23 @@
       });
     });
   </script>
-<style>
-  body {
-    cursor: none; /* Hides the default PC cursor */
-  }
 
-  .cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #a259ff; /* Purple */
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: background-color 0.3s ease;
-  }
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-  .cursor-outline {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #a259ff;
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease;
-  }
-</style>
+  <script>
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorOutline = document.querySelector(".cursor-outline");
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+    window.addEventListener("mousemove", (e) => {
+      cursorDot.style.top = `${e.clientY}px`;
+      cursorDot.style.left = `${e.clientX}px`;
 
-<script>
-  const cursorDot = document.querySelector(".cursor-dot");
-  const cursorOutline = document.querySelector(".cursor-outline");
-
-  window.addEventListener("mousemove", (e) => {
-    cursorDot.style.top = `${e.clientY}px`;
-    cursorDot.style.left = `${e.clientX}px`;
-
-    cursorOutline.style.top = `${e.clientY}px`;
-    cursorOutline.style.left = `${e.clientX}px`;
-  });
-</script>
-<script>
+      cursorOutline.style.top = `${e.clientY}px`;
+      cursorOutline.style.left = `${e.clientX}px`;
+    });
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Apply cursor: none !important to the entire document, overriding all else
         document.documentElement.style.setProperty('cursor', 'none', 'important');
@@ -247,11 +246,6 @@
             element.addEventListener('mouseenter', () => {
                 element.style.setProperty('cursor', 'none', 'important');
             });
-            // Adding a mouseleave to reset can sometimes be helpful, but with body/html always none,
-            // it might not be strictly necessary unless there's a specific conflicting leave behavior.
-            // element.addEventListener('mouseleave', () => {
-            //     element.style.removeProperty('cursor'); // Removes the inline style
-            // });
         });
 
         // A fallback for elements that might gain focus and show a cursor
@@ -262,12 +256,8 @@
             element.addEventListener('focus', () => {
                 element.style.setProperty('cursor', 'none', 'important');
             });
-            element.addEventListener('blur', () => {
-                // Consider removing on blur if you want to allow default cursor outside of hover/focus
-                // element.style.removeProperty('cursor');
-            });
         });
     });
-</script>
+  </script>
 </body>
 </html>
