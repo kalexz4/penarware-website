@@ -4,24 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hazy's Nixware HvH Configs</title>
-  <link rel="stylesheet" href="style.css">
   <style>
-    #tsparticles {
-      position: fixed;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: #0d0d0d;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInPage 1s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeInPage {
+      to {
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #a259ff;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #c0c0c0;
+      margin-bottom: 1.5rem;
+    }
+
+    .small-text {
+      font-size: 0.9rem;
+      color: rgba(192, 192, 192, 0.6);
+      line-height: 1.6;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .discord-button {
+      background-color: #a259ff;
+      border: none;
+      color: #ffffff;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .discord-button:hover {
+      background-color: #8f40f5;
+    }
+
+    .read-more-toggle {
+      color: #a259ff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+
+    .read-more-content {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+      transition: opacity 0.5s ease, visibility 0.5s ease, max-height 0.5s ease;
+      overflow: hidden;
+    }
+
+    .read-more-content.show {
+      opacity: 1;
+      visibility: visible;
+      max-height: 500px;
     }
   </style>
 </head>
 <body>
-  <div id="tsparticles"></div>
-
   <div class="container">
-    <h1>Hazy's Nixware HvH Config</h1>
+    <h1>Hazy's Nixware HvH Configs</h1>
     <p>Taps <em>all</em> cheats, Cheap, and Fast Support + Delivery. 💜</p>
 
     <p class="small-text">
@@ -37,64 +111,19 @@
     <div class="read-more-content" id="readMoreSection">
       <div class="small-text">
         Are you tired of wasting money buying configs that won't tap anything and just hit feet? Are you done with shitty devs that act like crap and don't help you do or set up anything if you're new? <br /><br />
-        <strong>We have the solution!</strong> Our Discord has some very talented Devs who will help you set everything up and help you with anything else. Our CFG has been tested over hours of our own time to try to make it as good as possible. We hope to see you in our Discord soon! -Hazy
+        <strong>We have the solution!</strong> Our Discord has some very talented Devs who will help you set everything up and help you with anything else. Our CFG has been tested over hours of our own time to try to make it as good as possible. We hope to see you in our Discord soon! —Hazy
       </div>
     </div>
   </div>
 
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
-
-  <!-- tsParticles CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.0/tsparticles.bundle.min.js"></script>
-
-  <!-- Your script.js -->
-  <script src="script.js"></script>
-
-  <!-- Particle Config -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      tsParticles.load("tsparticles", {
-        background: {
-          color: "#0d0d0d"
-        },
-        fpsLimit: 60,
-        particles: {
-          color: { value: "#a855f7" }, // purple
-          links: {
-            color: "#a855f7",
-            distance: 130,
-            enable: true,
-            opacity: 0.2,
-            width: 1
-          },
-          move: {
-            enable: true,
-            speed: 0.6,
-            direction: "none",
-            random: false,
-            straight: false,
-            outModes: { default: "bounce" }
-          },
-          number: {
-            value: 50,
-            density: { enable: true, area: 800 }
-          },
-          opacity: { value: 0.5 },
-          shape: { type: "circle" },
-          size: { value: { min: 1, max: 3 } }
-        },
-        detectRetina: true
-      });
-    });
+    function toggleReadMore() {
+      const section = document.getElementById("readMoreSection");
+      const toggle = document.getElementById("readMoreToggle");
+
+      section.classList.toggle("show");
+      toggle.textContent = section.classList.contains("show") ? "Read Less" : "Read More";
+    }
   </script>
-<!-- Particle container -->
-<div id="tsparticles"></div>
-
-<!-- tsParticles library -->
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.0.0/tsparticles.bundle.min.js"></script>
-<!-- Your existing script -->
-<script src="script.js"></script>
-
 </body>
 </html>
