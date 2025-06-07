@@ -116,3 +116,19 @@ p {
   transition: all 0.15s ease;
 }
 
+/* Hide default cursor on 'Read More' button hover */
+.button:hover {
+    cursor: none;
+}
+
+/* Hide default cursor on 'Discord' button hover */
+.discord-button:hover {
+    cursor: none;
+}
+
+/* Hide default cursor on any text input or textarea hover */
+input[type="text"]:hover,
+textarea:hover {
+    cursor: none;
+}
+
