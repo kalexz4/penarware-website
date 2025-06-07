@@ -1,115 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Load particle background
+window.addEventListener("load", () => {
   tsParticles.load("tsparticles", {
-    background: {
-      color: "#0d0d0d"
-    },
-    fpsLimit: 60,
     particles: {
-      color: { value: "#ffffff" },
+      number: {
+        value: 80,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      },
+      color: {
+        value: "#ffffff"
+      },
+      shape: {
+        type: "circle"
+      },
+      opacity: {
+        value: 0.5,
+        random: false
+      },
+      size: {
+        value: 3,
+        random: true
+      },
       links: {
-        color: "#ffffff",
-        distance: 130,
         enable: true,
-        opacity: 0.2,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.4,
         width: 1
       },
-      collisions: { enable: false },
       move: {
+        enable: true,
+        speed: 3,
         direction: "none",
-        enable: true,
-        outModes: { default: "bounce" },
         random: false,
-        speed: 0.6,
-        straight: false
-      },
-      number: {
-        density: { enable: true, area: 800 },
-        value: 50
-      },
-      opacity: { value: 0.5 },
-      shape: { type: "circle" },
-      size: { value: { min: 1, max: 3 } }
-    },
-    detectRetina: true
-  });
-
-  // Toggle Read More content
-  const section = document.getElementById("readMoreSection");
-  const toggle = document.getElementById("readMoreToggle");
-
-  toggle.addEventListener("click", () => {
-    section.classList.toggle("show");
-    toggle.textContent = section.classList.contains("show") ? "Read Less" : "Read More";
-  });
-
-  // Custom cursor
-  const cursorDot = document.querySelector(".cursor-dot");
-  const cursorOutline = document.querySelector(".cursor-outline");
-
-  window.addEventListener("mousemove", (e) => {
-    const { clientX, clientY } = e;
-    cursorDot.style.top = `${clientY}px`;
-    cursorDot.style.left = `${clientX}px`;
-    cursorOutline.style.top = `${clientY}px`;
-    cursorOutline.style.left = `${clientX}px`;
-  });
-});
-
-tsParticles.load("tsparticles", {
-  particles: {
-    number: {
-      value: 100,
-      density: {
-        enable: true,
-        value_area: 800
+        straight: false,
+        out_mode: "out",
+        bounce: false
       }
     },
-    color: {
-      value: "#ffffff"
-    },
-    shape: {
-      type: "circle"
-    },
-    opacity: {
-      value: 0.5,
-      random: false
-    },
-    size: {
-      value: 3,
-      random: true
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#ffffff",
-      opacity: 0.4,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 6,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: {
-        enable: true,
-        mode: "repulse"
+    interactivity: {
+      detectsOn: "canvas",
+      events: {
+        onHover: {
+          enable: true,
+          mode: "repulse"
+        },
+        onClick: {
+          enable: true,
+          mode: "push"
+        },
+        resize: true
       },
-      onclick: {
-        enable: true,
-        mode: "push"
-      },
-      resize: true
-    }
-  },
-  retina_detect: true
+      modes: {
+        repulse: {
+          distance: 100,
+          duration: 0.4
+        },
+        push: {
+          quantity: 4
+        }
+      }
+    },
+    retina_detect: true
+  });
 });
-
