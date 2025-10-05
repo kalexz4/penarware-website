@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Custom Config Page</title>
 
   <!-- Favicon -->
@@ -11,30 +11,28 @@
   <!-- Google Fonts: Proggy Clean -->
   <link href="https://fonts.googleapis.com/css2?family=Proggy+Clean&display=swap" rel="stylesheet">
 
-  <!-- particles.js library -->
+  <!-- particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
     body {
       background: #1a1a1a;
       color: #fff;
       font-family: 'Proggy Clean', monospace;
       overflow: hidden;
-      height: 100vh;
     }
+
+    /* Particles layer: put behind content, but ignore pointer events so it doesn't block clicks.
+       We use detect_on: "window" in the particles config so the mouse still affects particles. */
     #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      position: fixed;
+      inset: 0;               /* top:0; right:0; bottom:0; left:0; */
       z-index: 1;
+      pointer-events: none;   /* IMPORTANT: don't block clicks/hover on page elements */
     }
+
     .container {
       position: relative;
       z-index: 2;
@@ -42,41 +40,25 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      text-align: center;
+      min-height: 100vh;
       padding: 0 1rem;
+      text-align: center;
     }
-    h1 {
-      font-size: 2.6rem;
-      color: #ff3b3b;
-      margin-bottom: 0.8rem;
-      letter-spacing: 1px;
-    }
-    p {
-      color: #ccc;
-      max-width: 650px;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
+
+    h1 { font-size: 2.6rem; color: #ff3b3b; margin-bottom: 0.8rem; letter-spacing: 1px; }
+    p { color: #ccc; max-width: 650px; font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; }
+
     .btn {
-      background: linear-gradient(90deg, #ff3b3b, #b30000);
+      background: linear-gradient(90deg,#ff3b3b,#b30000);
       color: #fff;
       padding: 0.8rem 2rem;
-      border: none;
       border-radius: 30px;
-      font-size: 1rem;
       text-decoration: none;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
       font-family: 'Proggy Clean', monospace;
-      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(255,0,0,0.35);
+      z-index: 3; /* above everything so clickable */
     }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-    }
+    .btn:hover { transform: scale(1.03); }
   </style>
 </head>
 <body>
@@ -92,39 +74,28 @@
   </div>
 
   <script>
+    /* Updated config:
+       - detect_on: "window" (so mouse is tracked even when other elements overlay the canvas)
+       - interactivity.onhover.mode: "repulse"
+       - repulse.distance increased to make effect obvious
+    */
     particlesJS("particles-js", {
       particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: "#ff3b3b"
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.5,
-          random: false
-        },
-        size: {
-          value: 3,
-          random: true
-        },
+        number: { value: 90, density: { enable: true, value_area: 500 } },
+        color: { value: "#ff3b3b" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6, random: false },
+        size: { value: 2.5, random: true },
         line_linked: {
           enable: true,
           distance: 150,
           color: "#ff3b3b",
-          opacity: 0.4,
+          opacity: 0.35,
           width: 1
         },
         move: {
           enable: true,
-          speed: 2,
+          speed: 1.5,
           direction: "none",
           random: false,
           straight: false,
@@ -133,22 +104,14 @@
         }
       },
       interactivity: {
-        detect_on: "canvas",  // could try "window" if canvas is overlapped by elements
+        detect_on: "window",    // <-- use the window so mouse events are captured
         events: {
-          onhover: {
-            enable: true,
-            mode: "repulse"
-          },
-          onclick: {
-            enable: false
-          },
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: false },
           resize: true
         },
         modes: {
-          repulse: {
-            distance: 100,
-            duration: 0.7
-          }
+          repulse: { distance: 45, duration: 0.6 }  // tweak distance/duration as desired
         }
       },
       retina_detect: true
